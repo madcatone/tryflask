@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 from flask import Flask, render_template, session, redirect, url_for, escape, request
 from flask_bootstrap import Bootstrap
-import pgsql_conn
+import pgsql_conn_new
 import _uniout
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ Bootstrap(app)
 def index():
     if 'username' in session:
         #return 'Logged in as %s' % escape(session['username'])
-        tuple_records = pgsql_conn.select()
+        tuple_records = pgsql_conn_new.select()
         records = list(tuple_records)
         for i in records:
         	print _uniout.unescape(i[5], 'utf8')

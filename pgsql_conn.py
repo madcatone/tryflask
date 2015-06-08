@@ -3,7 +3,7 @@ __author__ = 'apple'
 import psycopg2
 
 def select():
-    conn_string = "host='localhost' dbname='cm_problem' user='postgres' password='ruby2501'"
+    conn_string = "host='localhost' dbname='dbname' user='postgres' password='password'"
     conn = psycopg2.connect(conn_string)
     cur = conn.cursor()
     cur.execute("select * from \"problem_mail\" order by p_date desc limit 100;")
