@@ -1,3 +1,10 @@
 .idea/
 venv/
 .pyc
+bin/
+.Python
+*.pyc
+include/
+lib/
+db_conn/
+pip-selfcheck.json

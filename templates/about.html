@@ -10,6 +10,6 @@
   <a href="logout" class="btn btn-xs btn-info" role="button">Logout</a>
   <p>編號 寄件者 日期</p>
 {% for i in records %}
-    <p><span class="label label-primary">{{ i[0].__str__(),i[1],i[2].__str__(),i[3],i[4],i[5] }}</span></p>
+    <p><span class="label label-primary">{{ i }}</span></p>
 {% endfor %}
 {% endblock %}

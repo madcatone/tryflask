@@ -1,12 +1,14 @@
 #-*- coding:utf-8 -*-
 from flask import Flask, render_template, session, redirect, url_for, escape, request
 from flask_bootstrap import Bootstrap
-import pgsql_conn_new
+import db_conn.pgsql_conn_new as pgsql_conn
+import db_conn.sqlalchemy_conn as alchemy_conn
 import _uniout
 
 app = Flask(__name__)
 Bootstrap(app)
 @app.route('/')
+@app.route('/index')
 #def index():
 #    records = pgsql_conn.select()
     #return records
@@ -14,13 +16,19 @@ Bootstrap(app)
 def index():
     if 'username' in session:
         #return 'Logged in as %s' % escape(session['username'])
-        tuple_records = pgsql_conn_new.select()
+        tuple_records = pgsql_conn.select()
         records = list(tuple_records)
         for i in records:
         	print _uniout.unescape(i[5], 'utf8')
         return render_template('index.html', records=records)
     return 'You are not logged in  </br><a href="login" class="btn btn-primary" role="button">Login</a> \
             <a href="bendon" class="btn btn-primary" role="button">Bendon</a>'
+
+@app.route('/about')
+def about():
+    records = Table('problem_mail', alchemy_conn.metadata, autoload=True)
+    r = records.select(users.id == 1).execute().first()
+    return render_template('about.html', records=r)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
